@@ -35,51 +35,53 @@ const Contact = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+  e.preventDefault();
+  setIsSubmitting(true);
 
-    try {
-      // For local development:
-      const API_URL = import.meta.env.DEV
-        ? "http://localhost:3001/api/contact"
-        : "/.netlify/functions/sendEmail";
+  // Switch API endpoint depending on environment
+  const API_URL = import.meta.env.DEV
+    ? "http://localhost:3001/api/contact" // local Express server
+    : "/.netlify/functions/sendEmail";    // Netlify Function
 
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      toast({
+        title: "Message sent successfully!",
+        description: "I'll get back to you within 24 hours.",
       });
-
-
-      if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "I'll get back to you within 24 hours.",
-        });
-        setFormData({
-          name: "",
-          email: "",
-          company: "",
-          message: "",
-        });
-      } else {
-        toast({
-          title: "Error sending message",
-          description: "Please try again later.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+      });
+    } else {
       toast({
         title: "Error sending message",
         description: "Please try again later.",
         variant: "destructive",
       });
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    toast({
+      title: "Error sending message",
+      description: "Please try again later.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleDownloadResume = async () => {
     try {
