@@ -9,7 +9,7 @@ export async function handler(event) {
   }
 
   try {
-    const { name, email, company, message } = JSON.parse(event.body);
+    const { formData } = JSON.parse(event.body);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
@@ -20,10 +20,10 @@ export async function handler(event) {
     });
 
     await transporter.sendMail({
-      from: `"${name}" <${email}>`,
+      from: `"${formData.name}" <${formData.email}>`,
       to: process.env.EMAIL_USER,
-      subject: `📨 Website Contact | ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,
+      subject: `📨 Website Contact | ${formData.name}`,
+      text: `Name: ${formData.name}\nEmail: ${formData.email}\nCompany: ${formData.company}\n\nMessage:\n${formData.message}`,
     });
 
     return {
