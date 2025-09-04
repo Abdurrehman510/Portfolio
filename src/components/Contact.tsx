@@ -39,13 +39,17 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3001/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      // For local development:
+      const API_URL = import.meta.env.DEV
+        ? "http://localhost:3001/api/contact"
+        : "/.netlify/functions/sendEmail";
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+
 
       if (response.ok) {
         toast({
