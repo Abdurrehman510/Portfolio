@@ -3,7 +3,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import {
   Mail,
@@ -27,93 +26,73 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  // Switch API endpoint depending on environment
-  const API_URL = import.meta.env.DEV
-    ? "http://localhost:3001/api/contact" // local Express server
-    : "/.netlify/functions/sendEmail";    // Netlify Function
+    // Switch between local Express and Netlify Functions
+    const API_URL = import.meta.env.DEV
+      ? "http://localhost:3001/api/contact"
+      : "/.netlify/functions/sendEmail";
 
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    if (response.ok) {
-      toast({
-        title: "Message sent successfully!",
-        description: "I'll get back to you within 24 hours.",
-      });
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        message: "",
-      });
-    } else {
-      toast({
-        title: "Error sending message",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    }
-  } catch (error) {
-    console.error("Error submitting form:", error);
-    toast({
-      title: "Error sending message",
-      description: "Please try again later.",
-      variant: "destructive",
-    });
-  } finally {
-    setIsSubmitting(false);
-  }
-};
-
-
-  const handleDownloadResume = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/resume');
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
       if (response.ok) {
-        const blob = await response.blob();
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'Abdurrehman_Narmawala_Resume.pdf';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
         toast({
-          title: "Resume download started",
-          description: `Downloading resume...`,
+          title: "Message sent successfully!",
+          description: "I'll get back to you within 24 hours.",
+        });
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          message: "",
         });
       } else {
         toast({
-          title: "Error downloading resume",
+          title: "Error sending message",
           description: "Please try again later.",
           variant: "destructive",
         });
       }
     } catch (error) {
-      console.error('Error downloading resume:', error);
+      console.error("Error submitting form:", error);
       toast({
-        title: "Error downloading resume",
+        title: "Error sending message",
         description: "Please try again later.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
+  };
+
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "/Abdurrehman_Narmawala_Resume.pdf"; // must be in public/ folder
+    link.download = "Abdurrehman_Narmawala_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    toast({
+      title: "Resume download started",
+      description: `Downloading resume...`,
+    });
   };
 
   const socialLinks = [
@@ -121,14 +100,14 @@ const Contact = () => {
       icon: Github,
       label: "GitHub",
       href: "https://github.com/abdurrehman",
-      color: "hover:text-purple-500"
+      color: "hover:text-purple-500",
     },
     {
       icon: Linkedin,
       label: "LinkedIn",
       href: "https://linkedin.com/in/abdurrehman-narmawala",
-      color: "hover:text-blue-500"
-    }
+      color: "hover:text-blue-500",
+    },
   ];
 
   return (
@@ -137,7 +116,7 @@ const Contact = () => {
       <div className="absolute top-0 left-0 w-full h-72 bg-gradient-to-b from-primary/5 to-transparent -z-10"></div>
       <div className="absolute -right-32 top-1/3 w-96 h-96 rounded-full bg-primary/10 blur-3xl -z-10"></div>
       <div className="absolute -left-32 bottom-1/4 w-80 h-80 rounded-full bg-secondary/10 blur-3xl -z-10"></div>
-      
+
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/70">
@@ -288,10 +267,10 @@ const Contact = () => {
                   </p>
                   <div className="flex gap-3">
                     {socialLinks.map((social, index) => (
-                      <a 
-                        key={index} 
-                        href={social.href} 
-                        target="_blank" 
+                      <a
+                        key={index}
+                        href={social.href}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1"
                       >
@@ -317,9 +296,7 @@ const Contact = () => {
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 mb-3">
                     <Clock className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold mb-2">
-                    Quick Response
-                  </h3>
+                  <h3 className="font-semibold mb-2">Quick Response</h3>
                   <p className="text-sm text-muted-foreground">
                     I typically respond within 24 hours
                   </p>
