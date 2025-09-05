@@ -68,7 +68,10 @@ const Projects = () => {
       "/images/doctor-patient-portal-ss11.png",
       "/images/doctor-patient-portal-ss12.png",
       "/images/doctor-patient-portal-ss13.png",
-      "/images/doctor-patient-portal-ss14.png"
+      "/images/doctor-patient-portal-ss14.png",
+      "/images/doctor-patient-portal-ss15.png",
+      "/images/doctor-patient-portal-ss16.png",
+      "/images/doctor-patient-portal-ss17.png"
     ]
     },
     {
