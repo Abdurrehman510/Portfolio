@@ -8,14 +8,14 @@ exports.handler = async function (event, context) {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL,
+      user: process.env.VITE_CONTACT_EMAIL,
       pass: process.env.PASSWORD,
     },
   });
 
   const mailOptions = {
     from: email,
-    to: process.env.EMAIL,
+    to: process.env.VITE_CONTACT_EMAIL,
     subject: `📨 Website Contact | ${name}`,
     text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,  };
 
