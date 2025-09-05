@@ -98,7 +98,7 @@ const Contact = () => {
         a.click();
         a.remove();
       } else {
-        console.error('Error downloading resume');
+        console.error('Error downloading resume.');
       }
     } catch (error) {
       console.error('Error downloading resume:', error);
