@@ -1,40 +1,34 @@
-import nodemailer from "nodemailer";
+// Portfolio/netlify/functions/sendEmail.js
 
-export async function handler(event) {
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ message: "Method Not Allowed" }),
-    };
-  }
+const nodemailer = require("nodemailer");
+
+exports.handler = async function (event, context) {
+  const { name, email, message } = JSON.parse(event.body);
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: email,
+    to: process.env.EMAIL,
+    subject: `📨 Website Contact | ${name}`,
+    text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,  };
 
   try {
-    const { name, email, company, message } = JSON.parse(event.body);
-
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    await transporter.sendMail({
-      from: `"${name}" <${email}>`,
-      to: process.env.EMAIL_USER,
-      subject: `📨 Website Contact | ${name}`,
-      text: `Name: ${name}\nEmail: ${email}\nCompany: ${company}\n\nMessage:\n${message}`,
-    });
-
+    await transporter.sendMail(mailOptions);
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: "Message sent successfully!" }),
+      body: JSON.stringify({ message: "Email sent successfully" }),
     };
   } catch (error) {
-    console.error("❌ Error sending email:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ message: "Error sending email", error: error.message }),
+      body: JSON.stringify({ message: "Error sending email", error }),
     };
   }
-}
+};
