@@ -100,7 +100,26 @@ const Projects = () => {
       documentationUrl: "/S.R.Agency_Software_Documentation.pdf",
       downloadUrl: null,
       image: "/images/S.R._Project_img.webp",
-      screenshots: ["/images/sr-agency-sells.png", "/images/sr-agency-purchase.png", "/images/sr-agency-ss3.png"]
+      screenshots: [
+  "/images/sr-agency-ss1.png",
+  "/images/sr-agency-ss2.png",
+  "/images/sr-agency-ss3.png",
+  "/images/sr-agency-ss4.png",
+  "/images/sr-agency-ss5.png",
+  "/images/sr-agency-ss6.png",
+  "/images/sr-agency-ss7.png",
+  "/images/sr-agency-ss8.png",
+  "/images/sr-agency-ss9.png",
+  "/images/sr-agency-ss10.png",
+  "/images/sr-agency-ss11.png",
+  "/images/sr-agency-ss12.png",
+  "/images/sr-agency-ss13.png",
+  "/images/sr-agency-ss14.png",
+  "/images/sr-agency-ss15.png",
+  "/images/sr-agency-ss16.png",
+  "/images/sr-agency-ss17.png"
+]
+
     },
     {
     id: 3,
@@ -160,9 +179,10 @@ const Projects = () => {
     }
   ];
 
-  const filteredProjects = filter === "All"
+  const filteredProjects =
+  filter === "All"
     ? projects
-    : projects.filter(project => project.category === filter || (filter === 'Web' && project.category === 'Full-Stack') || (filter === 'Desktop' && project.category === 'Full-Stack'));
+    : projects.filter(project => project.category === filter);
 
   const ProjectDetailModal = ({ project, initialTab = "overview" }: { project: (typeof projects)[0], initialTab?: string }) => {
   const [activeTab, setActiveTab] = useState(initialTab);
