@@ -129,7 +129,8 @@ const Hero = () => {
                 <Linkedin className="w-5 h-5" />
               </Button>
             </a>
-            <a href="mailto:abdurrehmannarmawala510@gmail.com">
+            <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
+              {import.meta.env.VITE_CONTACT_EMAIL}
               <Button variant="ghost" size="icon" className="hover-glow">
                 <Mail className="w-5 h-5" />
               </Button>
