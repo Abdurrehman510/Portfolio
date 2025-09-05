@@ -85,7 +85,7 @@ const Contact = () => {
     try {
       const response = await fetch('/Abdurrehman_Narmawala_Resume.pdf');
       if (response.ok) {
-        toast({
+            toast({
           title: "Resume download started",
           description: `Downloading resume...`,
         });
@@ -109,7 +109,7 @@ const Contact = () => {
     {
       icon: Github,
       label: "GitHub",
-      href: "https://github.com/abdurrehman",
+      href: "https://github.com/Abdurrehman510",
       color: "hover:text-purple-500",
     },
     {

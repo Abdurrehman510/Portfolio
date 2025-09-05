@@ -99,11 +99,11 @@ const Hero = () => {
             <Button
               onClick={handleDownloadResume}
               variant="outline"
+              className="w-full justify-center py-5 border-2 border-primary/20 hover:border-primary/40 transition-colors group"
               size="lg"
-              className="px-8 py-4 text-lg hover-glow"
             >
-              <Download className="w-5 h-5 mr-2" />
-              Download Resume
+              <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+              Download Resume (PDF)
             </Button>
 
             <Button
