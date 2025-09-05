@@ -81,18 +81,28 @@ const Contact = () => {
     }
   };
 
-  const handleDownloadResume = () => {
-    const link = document.createElement("a");
-    link.href = "/Abdurrehman_Narmawala_Resume.pdf"; // must be in public/ folder
-    link.download = "Abdurrehman_Narmawala_Resume.pdf";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-
-    toast({
-      title: "Resume download started",
-      description: `Downloading resume...`,
-    });
+  const handleDownloadResume = async () => {
+    try {
+      const response = await fetch('/Abdurrehman_Narmawala_Resume.pdf');
+      if (response.ok) {
+        toast({
+          title: "Resume download started",
+          description: `Downloading resume...`,
+        });
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Abdurrehman_Narmawala_Resume.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        console.error('Error downloading resume');
+      }
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+    }
   };
 
   const socialLinks = [
