@@ -103,6 +103,8 @@ const Projects = () => {
       screenshots: [
   "/images/sr-agency-ss1.png",
   "/images/sr-agency-ss2.png",
+  "/images/sr-agency-ss12.png",
+  "/images/sr-agency-ss13.png",
   "/images/sr-agency-ss3.png",
   "/images/sr-agency-ss4.png",
   "/images/sr-agency-ss5.png",
@@ -112,12 +114,9 @@ const Projects = () => {
   "/images/sr-agency-ss9.png",
   "/images/sr-agency-ss10.png",
   "/images/sr-agency-ss11.png",
-  "/images/sr-agency-ss12.png",
-  "/images/sr-agency-ss13.png",
   "/images/sr-agency-ss14.png",
   "/images/sr-agency-ss15.png",
-  "/images/sr-agency-ss16.png",
-  "/images/sr-agency-ss17.png"
+  "/images/sr-agency-ss16.png"
 ]
 
     },
