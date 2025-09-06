@@ -32,7 +32,7 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
-      title: "Doctor-Patient Portal",
+      title: "Health Plus",
       shortDescription: "A full-stack telemedicine platform connecting doctors and patients securely.",
       category: "Full-Stack",
       duration: "4 Months",
@@ -55,29 +55,29 @@ const Projects = () => {
       liveUrl: null,
       image: "/images/HealthPlus_Project_img.webp",
       screenshots: [
-      "/images/doctor-patient-portal-ss1.png",
-      "/images/doctor-patient-portal-ss2.png",
-      "/images/doctor-patient-portal-ss3.png",
-      "/images/doctor-patient-portal-ss4.png",
-      "/images/doctor-patient-portal-ss5.png",
-      "/images/doctor-patient-portal-ss6.png",
-      "/images/doctor-patient-portal-ss7.png",
-      "/images/doctor-patient-portal-ss8.png",
-      "/images/doctor-patient-portal-ss9.png",
-      "/images/doctor-patient-portal-ss10.png",
-      "/images/doctor-patient-portal-ss11.png",
-      "/images/doctor-patient-portal-ss12.png",
-      "/images/doctor-patient-portal-ss13.png",
-      "/images/doctor-patient-portal-ss14.png",
-      "/images/doctor-patient-portal-ss15.png",
-      "/images/doctor-patient-portal-ss16.png",
-      "/images/doctor-patient-portal-ss17.png",
-      "/images/doctor-patient-portal-ss18.png"
+      "/images/doctor-patient-portal-ss1.webp",
+      "/images/doctor-patient-portal-ss2.webp",
+      "/images/doctor-patient-portal-ss3.webp",
+      "/images/doctor-patient-portal-ss4.webp",
+      "/images/doctor-patient-portal-ss5.webp",
+      "/images/doctor-patient-portal-ss6.webp",
+      "/images/doctor-patient-portal-ss7.webp",
+      "/images/doctor-patient-portal-ss8.webp",
+      "/images/doctor-patient-portal-ss9.webp",
+      "/images/doctor-patient-portal-ss10.webp",
+      "/images/doctor-patient-portal-ss11.webp",
+      "/images/doctor-patient-portal-ss12.webp",
+      "/images/doctor-patient-portal-ss13.webp",
+      "/images/doctor-patient-portal-ss14.webp",
+      "/images/doctor-patient-portal-ss15.webp",
+      "/images/doctor-patient-portal-ss16.webp",
+      "/images/doctor-patient-portal-ss17.webp",
+      "/images/doctor-patient-portal-ss18.webp"
     ]
     },
     {
       id: 2,
-      title: "S.R. Agency - Business Management Software",
+      title: "S.R. Agency : Business Management Software",
       shortDescription: "A comprehensive Python desktop application to manage sales, purchases, inventory, and customer/supplier data.",
       category: "Desktop",
       duration: "10 Weeks",
@@ -101,28 +101,28 @@ const Projects = () => {
       downloadUrl: null,
       image: "/images/S.R._Project_img.webp",
       screenshots: [
-  "/images/sr-agency-ss1.png",
-  "/images/sr-agency-ss2.png",
-  "/images/sr-agency-ss12.png",
-  "/images/sr-agency-ss13.png",
-  "/images/sr-agency-ss3.png",
-  "/images/sr-agency-ss4.png",
-  "/images/sr-agency-ss5.png",
-  "/images/sr-agency-ss6.png",
-  "/images/sr-agency-ss7.png",
-  "/images/sr-agency-ss8.png",
-  "/images/sr-agency-ss9.png",
-  "/images/sr-agency-ss10.png",
-  "/images/sr-agency-ss11.png",
-  "/images/sr-agency-ss14.png",
-  "/images/sr-agency-ss15.png",
-  "/images/sr-agency-ss16.png"
+  "/images/sr-agency-ss1.webp",
+  "/images/sr-agency-ss2.webp",
+  "/images/sr-agency-ss12.webp",
+  "/images/sr-agency-ss13.webp",
+  "/images/sr-agency-ss3.webp",
+  "/images/sr-agency-ss4.webp",
+  "/images/sr-agency-ss5.webp",
+  "/images/sr-agency-ss6.webp",
+  "/images/sr-agency-ss7.webp",
+  "/images/sr-agency-ss8.webp",
+  "/images/sr-agency-ss9.webp",
+  "/images/sr-agency-ss10.webp",
+  "/images/sr-agency-ss11.webp",
+  "/images/sr-agency-ss14.webp",
+  "/images/sr-agency-ss15.webp",
+  "/images/sr-agency-ss16.webp"
 ]
 
     },
     {
     id: 3,
-    title: "Fashion Hub - E-commerce Website",
+    title: "Fashion Hub : E-commerce Website",
     shortDescription: "A dynamic and responsive e-commerce website for a clothing store.",
     category: "Web",
     duration: "8 Weeks",
@@ -144,16 +144,16 @@ const Projects = () => {
     liveUrl: null,
     image: "/images/FashionHub_Project_img.webp",
     screenshots: [
-      "/images/fashion-hub-signup.png",
-      "/images/fashion-hub-home.png",
-      "/images/fashion-hub-products.png",
-      "/images/fashion-hub-product.png",
-      "/images/fashion-hub-cart.png",
+      "/images/fashion-hub-signup.webp",
+      "/images/fashion-hub-home.webp",
+      "/images/fashion-hub-products.webp",
+      "/images/fashion-hub-product.webp",
+      "/images/fashion-hub-cart.webp",
     ]
     },
     {
       id: 4,
-      title: "AC Management System",
+      title: "AC Service Management Software",
       shortDescription: "A robust desktop application developed in Java to streamline client and service management for an AC business.",
       category: "Desktop",
       duration: "6 Weeks",
@@ -174,7 +174,7 @@ const Projects = () => {
       documentationUrl: "/AC_Management_System_Documentation.pdf",
       downloadUrl: null,
       image: "/images/AC_Project_img.webp",
-      screenshots: ["/images/ac-management-system-ss1.png", "/images/ac-management-system-ss2.png"]
+      screenshots: ["/images/ac-management-system-ss1.webp", "/images/ac-management-system-ss2.webp"]
     }
   ];
 
@@ -219,7 +219,7 @@ const Projects = () => {
             </TabsTrigger>
             {project.screenshots.length > 0 && (
               <TabsTrigger value="screenshots" className="flex items-center gap-2">
-                <ImageIcon className="w-4 h-4" /> Screenshots
+                <ImageIcon className="w-4 h-4" /> Gallery
               </TabsTrigger>
             )}
           </TabsList>
@@ -417,8 +417,8 @@ const Projects = () => {
     <section id="projects" className="py-20 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-            Projects Gallery
+          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4 py-2">
+            Project Gallery
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A showcase of full-stack applications, desktop software, and AI-powered solutions

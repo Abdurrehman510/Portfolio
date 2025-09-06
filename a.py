@@ -2,7 +2,7 @@ import os
 from PIL import Image
 
 # Folder path
-folder_path = r"D:\spectrum-of-skill\public\images"
+folder_path = r"D:\Portfolio\public\images"
 
 # Loop through all files in the folder
 for filename in os.listdir(folder_path):

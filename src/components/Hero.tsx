@@ -4,8 +4,8 @@ import { Badge } from "@/components/ui/badge";
 
 const Hero = () => {
   const stats = [
-    { label: "4 Major Projects", value: "04" },
-    { label: "2 Hackathons/Workshops", value: "02" },
+    { label: "Projects", value: "10+" },
+    { label: "Hackathons/Workshops", value: "02" },
     { label: "Backend + Frontend", value: "∞" }
   ];
 
@@ -72,7 +72,7 @@ const Hero = () => {
 
           {/* Education badge */}
           <Badge variant="secondary" className="mb-8 px-4 py-2 text-sm animate-fade-in" style={{ animationDelay: '0.3s' }}>
-            B.Tech CSE, L.J. University, Ahmedabad
+            B.E. CSE, L.J. University, Ahmedabad
           </Badge>
 
           {/* Stats */}
@@ -130,7 +130,6 @@ const Hero = () => {
               </Button>
             </a>
             <a href={`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`}>
-              {import.meta.env.VITE_CONTACT_EMAIL}
               <Button variant="ghost" size="icon" className="hover-glow">
                 <Mail className="w-5 h-5" />
               </Button>

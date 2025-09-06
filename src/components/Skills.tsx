@@ -8,15 +8,47 @@ import {
   Database,
   Briefcase,
   GitMerge,
-  Cpu
+  Cpu,
+  Sparkles,
+  Zap,
+  Target,
+  Layers,
+  BarChart3,
+  Shield,
+  Palette,
+  Server
 } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const Skills = () => {
+  const [animatedProgress, setAnimatedProgress] = useState<{ animated: boolean }>({ animated: false });
+  
+  // Animate progress bars on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const skillsSection = document.getElementById('skills');
+      if (skillsSection) {
+        const rect = skillsSection.getBoundingClientRect();
+        const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom >= 0;
+        
+        if (isInView && Object.keys(animatedProgress).length === 0) {
+          setAnimatedProgress({ animated: true });
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Check on initial load
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [animatedProgress]);
+
   const skillClusters = [
     {
       title: "AI & Data Science",
       icon: Brain,
-      color: "from-purple-500 to-pink-500",
+      color: "from-purple-500 via-purple-600 to-pink-500",
+      bgColor: "bg-gradient-to-br from-purple-900/20 to-pink-900/20",
       skills: [
         { name: "AI/ML Concepts", level: 85, description: "Leveraging AI for automation and intelligent features" },
         { name: "Python", level: 90, description: "Pandas, NumPy for data analysis and manipulation" },
@@ -24,9 +56,10 @@ const Skills = () => {
       ]
     },
     {
-      title: "Web & Full-Stack Development",
+      title: "Web & Full-Stack",
       icon: Globe,
-      color: "from-blue-500 to-cyan-500",
+      color: "from-blue-500 via-blue-600 to-cyan-500",
+      bgColor: "bg-gradient-to-br from-blue-900/20 to-cyan-900/20",
       skills: [
         { name: "React", level: 90, description: "Building dynamic and responsive user interfaces" },
         { name: "Node.js & Express.js", level: 85, description: "Creating robust and scalable REST APIs" },
@@ -34,9 +67,10 @@ const Skills = () => {
       ]
     },
     {
-      title: "Core Languages & Databases",
+      title: "Languages & Databases",
       icon: Database,
-      color: "from-green-500 to-teal-500",
+      color: "from-green-500 via-green-600 to-teal-500",
+      bgColor: "bg-gradient-to-br from-green-900/20 to-teal-900/20",
       skills: [
         { name: "JavaScript (ES6+)", level: 90, description: "Core language for modern web development" },
         { name: "Java", level: 85, description: "Building desktop applications with Swing and JDBC" },
@@ -44,9 +78,10 @@ const Skills = () => {
       ]
     },
     {
-      title: "Developer Tools & Methodologies",
+      title: "Tools & Methodologies",
       icon: GitMerge,
-      color: "from-orange-500 to-red-500",
+      color: "from-orange-500 via-orange-600 to-red-500",
+      bgColor: "bg-gradient-to-br from-orange-900/20 to-red-900/20",
       skills: [
         { name: "Git & GitHub", level: 90, description: "Version control and collaborative development" },
         { name: "Agile", level: 80, description: "Working in iterative and collaborative environments" },
@@ -56,102 +91,162 @@ const Skills = () => {
   ];
 
   const technologies = [
-    { name: "HTML", category: "Frontend", proficiency: 95 },
-    { name: "CSS & Tailwind", category: "Frontend", proficiency: 90 },
-    { name: "Java Spring Boot", category: "Backend", proficiency: 75 },
-    { name: "Django", category: "Backend", proficiency: 70 },
-    { name: "JWT & OAuth", category: "Security", proficiency: 80 },
-    { name: "Data Structures", category: "CS Fundamentals", proficiency: 85 },
-    { name: "Matplotlib", category: "Data Science", proficiency: 70 },
-    { name: "Bootstrap", category: "Frontend", proficiency: 80 }
+    { name: "HTML", category: "Frontend", proficiency: 95, icon: Code },
+    { name: "CSS & Tailwind", category: "Frontend", proficiency: 90, icon: Palette },
+    { name: "Java Spring Boot", category: "Backend", proficiency: 75, icon: Server },
+    { name: "Django", category: "Backend", proficiency: 70, icon: Layers },
+    { name: "JWT & OAuth", category: "Security", proficiency: 80, icon: Shield },
+    { name: "Data Structures", category: "CS Fundamentals", proficiency: 85, icon: BarChart3 },
+    { name: "Matplotlib", category: "Data Science", proficiency: 70, icon: BarChart3 },
+    { name: "Bootstrap", category: "Frontend", proficiency: 80, icon: Palette }
+  ];
+
+  const expertiseAreas = [
+    { icon: Code, label: "Clean Code", description: "Writing maintainable, efficient code" },
+    { icon: Briefcase, label: "Product Focus", description: "Building solutions that users love" },
+    { icon: Cpu, label: "System Architecture", description: "Designing scalable systems" },
+    { icon: Brain, label: "Problem Solving", description: "Creative solutions to complex problems" },
+    { icon: Zap, label: "Fast Execution", description: "Rapid prototyping and development" },
+    { icon: Target, label: "Precision", description: "Attention to detail and quality" }
   ];
 
   return (
-    <section id="skills" className="py-20 relative">
-      <div className="container mx-auto px-4">
+    <section id="skills" className="py-20 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full filter blur-3xl animate-pulse-slow"></div>
+        <div className="absolute top-1/3 right-20 w-96 h-96 bg-blue-500 rounded-full filter blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-green-500 rounded-full filter blur-3xl animate-pulse-slow" style={{ animationDelay: '4s' }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold gradient-text mb-4">
-            Skills & Strengths
+          <Badge variant="outline" className="mb-4 py-2 px-4 border-primary/30 bg-primary/10 text-primary font-semibold">
+            <Sparkles className="w-4 h-4 mr-2" /> Technical Expertise
+          </Badge>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-orange-300 to-orange-600 py-2">
+            Skills & Technologies
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A comprehensive toolkit for building modern, intelligent applications
+            A comprehensive toolkit for building modern, intelligent applications with precision and creativity
           </p>
         </div>
 
-        {/* Skill Clusters */}
+        {/* Skill Clusters with enhanced design */}
         <div className="grid md:grid-cols-2 gap-8 mb-16">
-          {skillClusters.map((cluster, index) => (
-            <Card key={index} className="glass-card hover-glow group">
-              <CardHeader className="pb-4">
-                <CardTitle className="flex items-center gap-3">
-                  <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${cluster.color} p-3 group-hover:scale-110 transition-transform duration-300`}>
-                    <cluster.icon className="w-full h-full text-white" />
-                  </div>
-                  <span className="text-xl">{cluster.title}</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {cluster.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium">{skill.name}</span>
-                      <Badge variant="secondary" className="text-xs">
-                        {skill.level}%
-                      </Badge>
+          {skillClusters.map((cluster, index) => {
+            const IconComponent = cluster.icon;
+            return (
+              <Card key={index} className={`relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 group ${cluster.bgColor}`}>
+                <div className={`absolute inset-0 bg-gradient-to-br opacity-10 ${cluster.color}`}></div>
+                <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-gradient-to-br opacity-20 group-hover:opacity-30 transition-opacity duration-500 ${cluster.color}"></div>
+                
+                <CardHeader className="pb-4 relative z-10">
+                  <CardTitle className="flex items-center gap-4">
+                    <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cluster.color} p-3 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
+                      <IconComponent className="w-full h-full text-white" />
                     </div>
-                    <Progress value={skill.level} className="h-2" />
-                    <p className="text-sm text-muted-foreground">{skill.description}</p>
-                  </div>
-                ))}
-              </CardContent>
-            </Card>
-          ))}
+                    <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">
+                      {cluster.title}
+                    </span>
+                  </CardTitle>
+                </CardHeader>
+                
+                <CardContent className="space-y-5 relative z-10">
+                  {cluster.skills.map((skill, skillIndex) => (
+                    <div key={skillIndex} className="space-y-3 p-3 rounded-lg bg-background/50 backdrop-blur-sm">
+                      <div className="flex justify-between items-center">
+                        <span className="font-semibold text-foreground/90">{skill.name}</span>
+                        <Badge variant="secondary" className="text-xs font-bold py-1">
+                          {skill.level}%
+                        </Badge>
+                      </div>
+                      <div className="w-full bg-secondary rounded-full h-2.5 overflow-hidden">
+                        <div 
+                          className={`h-full rounded-full bg-gradient-to-r ${cluster.color} transition-all duration-1000 ease-out`}
+                          style={{ width: animatedProgress.animated ? `${skill.level}%` : '0%' }}
+                        ></div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
 
-        {/* Technology Proficiency */}
-        <Card className="glass-card hover-glow">
-          <CardHeader>
-            <CardTitle className="text-2xl text-center">Technology Proficiency</CardTitle>
+        {/* Technology Proficiency with icons */}
+        <Card className="border-0 shadow-xl bg-gradient-to-br from-card to-card/80 backdrop-blur-sm overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-blue-500/5"></div>
+          <CardHeader className="relative z-10">
+            <CardTitle className="text-2xl text-center flex items-center justify-center gap-3">
+              <Layers className="w-8 h-8 text-primary" />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">
+                Technology Proficiency
+              </span>
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          
+          <CardContent className="relative z-10">
             <div className="grid md:grid-cols-2 gap-6">
-              {technologies.map((tech, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center gap-2">
-                      <span className="font-medium">{tech.name}</span>
-                      <Badge variant="outline" className="text-xs">
-                        {tech.category}
-                      </Badge>
+              {technologies.map((tech, index) => {
+                const IconComponent = tech.icon;
+                return (
+                  <div key={index} className="space-y-3 p-4 rounded-lg bg-background/50 hover:bg-background/70 transition-colors duration-300 group">
+                    <div className="flex justify-between items-center">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                          <IconComponent className="w-5 h-5 text-primary" />
+                        </div>
+                        <div>
+                          <span className="font-semibold">{tech.name}</span>
+                          <Badge variant="outline" className="ml-2 text-xs">
+                            {tech.category}
+                          </Badge>
+                        </div>
+                      </div>
+                      <span className="text-sm font-medium text-primary">
+                        {tech.proficiency}%
+                      </span>
                     </div>
-                    <span className="text-sm text-muted-foreground">
-                      {tech.proficiency}%
-                    </span>
+                    <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
+                      <div 
+                        className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-1000 ease-out"
+                        style={{ width: animatedProgress.animated ? `${tech.proficiency}%` : '0%' }}
+                      ></div>
+                    </div>
                   </div>
-                  <Progress value={tech.proficiency} className="h-2" />
-                </div>
-              ))}
-              </div>
-            </CardContent>
+                );
+              })}
+            </div>
+          </CardContent>
         </Card>
 
-        {/* Additional Skills Icons */}
+        {/* Additional Expertise with improved layout */}
         <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold mb-8">Additional Expertise</h3>
-          <div className="flex flex-wrap justify-center gap-6">
-            {[
-              { icon: Code, label: "Clean Code" },
-              { icon: Briefcase, label: "Product Focus" },
-              { icon: Cpu, label: "System Architecture" },
-              { icon: Brain, label: "Problem Solving" }
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center gap-2 hover-glow p-4 rounded-lg">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                  <item.icon className="w-6 h-6 text-primary" />
+          <h3 className="text-2xl font-bold mb-12 flex items-center justify-center gap-3">
+            <Zap className="w-7 h-7 text-primary" />
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/80">
+              Core Strengths
+            </span>
+          </h3>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+            {expertiseAreas.map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <div key={index} className="flex flex-col items-center gap-4 p-6 rounded-xl bg-background/50 backdrop-blur-sm border border-border/50 hover:border-primary/30 hover:shadow-lg transition-all duration-300 group">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary/10 to-blue-500/10 rounded-2xl flex items-center justify-center group-hover:from-primary/20 group-hover:to-blue-500/20 transition-all duration-300">
+                    <IconComponent className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                  </div>
+                  <div>
+                    <span className="font-semibold text-foreground/90">{item.label}</span>
+                    <p className="text-sm text-muted-foreground mt-2">{item.description}</p>
+                  </div>
                 </div>
-                <span className="text-sm font-medium">{item.label}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
