@@ -21,25 +21,25 @@ import {
 import { useState, useEffect } from "react";
 
 const Skills = () => {
-  const [animatedProgress, setAnimatedProgress] = useState<{ animated: boolean }>({ animated: false });
-  
-  // Animate progress bars on scroll
-  useEffect(() => {
+  const [animatedProgress, setAnimatedProgress] = useState(false);
+
+    // Animate progress bars on scroll
+    useEffect(() => {
     const handleScroll = () => {
       const skillsSection = document.getElementById('skills');
       if (skillsSection) {
         const rect = skillsSection.getBoundingClientRect();
         const isInView = rect.top < window.innerHeight * 0.8 && rect.bottom >= 0;
         
-        if (isInView && Object.keys(animatedProgress).length === 0) {
-          setAnimatedProgress({ animated: true });
+        if (isInView && !animatedProgress) {
+          setAnimatedProgress(true);
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     handleScroll(); // Check on initial load
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, [animatedProgress]);
 
@@ -164,7 +164,7 @@ const Skills = () => {
                       <div className="w-full bg-secondary rounded-full h-2.5 overflow-hidden">
                         <div 
                           className={`h-full rounded-full bg-gradient-to-r ${cluster.color} transition-all duration-1000 ease-out`}
-                          style={{ width: animatedProgress.animated ? `${skill.level}%` : '0%' }}
+                          style={{ width: animatedProgress ? `${skill.level}%` : '0%' }}
                         ></div>
                       </div>
                       <p className="text-sm text-muted-foreground leading-relaxed">{skill.description}</p>
@@ -213,7 +213,7 @@ const Skills = () => {
                     <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
                       <div 
                         className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-500 transition-all duration-1000 ease-out"
-                        style={{ width: animatedProgress.animated ? `${tech.proficiency}%` : '0%' }}
+                        style={{ width: animatedProgress ? `${tech.proficiency}%` : '0%' }}
                       ></div>
                     </div>
                   </div>
