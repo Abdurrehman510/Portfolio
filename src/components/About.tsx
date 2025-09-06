@@ -8,32 +8,37 @@ const About = () => {
   
   const timelineItems = [
     {
-      year: "2021",
+      year: "2019 - 2021",
       title: "Secondary School (SSC)",
       description: "Completed SSC from G.L.S. Sec. School, Ahmedabad with distinction.",
       icon: GraduationCap,
       type: "education"
     },
     {
-      year: "2023",
+      year: "2021 - 2023",
       title: "Higher Secondary (HSC)",
-      description: "Completed HSC from Blue Bell Higher Sec. School, Ahmedabad with focus on Computer Science.",
+      description: (
+          <>
+            Completed HSC from Blue Bell Higher Sec. School, Ahmedabad with
+            <br />
+            focus on Computer Science.
+          </>
+        ),
       icon: GraduationCap,
       type: "education"
     },
     {
-      year: "2023",
-      title: "Started B.E. CSE",
-      description: "Began Computer Science Engineering at L.J. University, Ahmedabad. Current CGPA: 9.2",
+      year: "2023 - Present",
+      title: "Bachelor Of Engineering In CSE",
+      description: (
+          <>
+            Began Computer Science Engineering at L.J. University, Ahmedabad.      
+            <br />
+            Current CGPA: 8.7
+          </>
+        ),
       icon: GraduationCap,
       type: "education"
-    },
-    {
-      year: "2025",
-      title: "Odoo Hackathon 2025",
-      description: "Participated in Odoo Hackathon 2025, developed an innovative inventory management solution.",
-      icon: Trophy,
-      type: "achievement"
     }
   ];
 
@@ -169,7 +174,7 @@ const About = () => {
                       ${item.type === "education" ? "bg-primary" : "bg-purple-500"}`}>
                     </div>
                     
-                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-40">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <div className="flex-shrink-0">
