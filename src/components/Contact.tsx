@@ -64,7 +64,7 @@ const Contact = () => {
         });
       } else {
         toast({
-          title: "Error sending message",
+          title: "Response Is not OK",
           description: "Please try again later.",
           variant: "destructive",
         });
@@ -73,7 +73,7 @@ const Contact = () => {
       console.error("Error submitting form:", error);
       toast({
         title: "Error sending message",
-        description: "Please try again later.",
+        description: `Please try again later. ${error}`,
         variant: "destructive",
       });
     } finally {
