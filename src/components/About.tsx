@@ -157,7 +157,7 @@ const About = () => {
 
           {/* Right Column - Timeline */}
           <div>
-            <div className="flex items-center gap-3 mb-8 lg:justify-start">
+            <div className="flex items-center gap-3 mb-8 justify-start">
               <div className="w-3 h-8 bg-primary rounded-full"></div>
               <h3 className="text-2xl font-semibold tracking-tight">My Timeline</h3>
             </div>
