@@ -174,31 +174,44 @@ const About = () => {
                       ${item.type === "education" ? "bg-primary" : "bg-purple-500"}`}>
                     </div>
                     
-                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg min-h-40 h-full">
+                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg min-h-40">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <div className="flex-shrink-0">
-                            <div className={`w-12 h-12 rounded-full flex items-center justify-center
-                              ${item.type === "education" ? "bg-primary/10" : "bg-purple-500/10"}`}>
-                              <item.icon className={`w-6 h-6 ${item.type === "education" ? "text-primary" : "text-purple-500"}`} />
+                            <div
+                              className={`w-12 h-12 rounded-full flex items-center justify-center
+                                ${item.type === "education" ? "bg-primary/10" : "bg-purple-500/10"}`}
+                            >
+                              <item.icon
+                                className={`w-6 h-6 ${
+                                  item.type === "education" ? "text-primary" : "text-purple-500"
+                                }`}
+                              />
                             </div>
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-2 mb-2">
-                              <Badge 
-                                variant="outline" 
-                                className={`text-xs ${item.type === "education" ? "border-primary/30 text-primary" : "border-purple-500/30 text-purple-500"}`}
+                              <Badge
+                                variant="outline"
+                                className={`text-xs ${
+                                  item.type === "education"
+                                    ? "border-primary/30 text-primary"
+                                    : "border-purple-500/30 text-purple-500"
+                                }`}
                               >
                                 {item.year}
                               </Badge>
                               <Calendar className="w-4 h-4 text-muted-foreground" />
                             </div>
                             <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-                            <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                            <p className="text-muted-foreground text-sm leading-relaxed">
+                              {item.description}
+                            </p>
                           </div>
                         </div>
                       </CardContent>
                     </Card>
+
                   </div>
                 ))}
               </div>
