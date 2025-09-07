@@ -174,7 +174,7 @@ const About = () => {
                       ${item.type === "education" ? "bg-primary" : "bg-purple-500"}`}>
                     </div>
                     
-                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg h-40">
+                    <Card className="glass-card ml-12 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg min-h-40 h-full">
                       <CardContent className="p-6">
                         <div className="flex items-start gap-4">
                           <div className="flex-shrink-0">
