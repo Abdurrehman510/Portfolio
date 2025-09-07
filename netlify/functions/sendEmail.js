@@ -12,13 +12,16 @@ exports.handler = async function (event, context) {
   }
 
   try {
-    const { name, email, company, message } = JSON.parse(event.body);
+    const body = JSON.parse(event.body);
+    const { name, email, company, message, timezone } = body;
 
     // Enhanced validation
     if (!name || !email || !message) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: "Name, email, and message are required." }),
+        body: JSON.stringify({
+          message: "Name, email, and message are required.",
+        }),
       };
     }
 
@@ -27,7 +30,9 @@ exports.handler = async function (event, context) {
     if (!emailRegex.test(email)) {
       return {
         statusCode: 400,
-        body: JSON.stringify({ message: "Please provide a valid email address." }),
+        body: JSON.stringify({
+          message: "Please provide a valid email address.",
+        }),
       };
     }
 
@@ -39,17 +44,27 @@ exports.handler = async function (event, context) {
       },
     });
 
-    // Get current date and time for the email
+    // Accurate date & time formatting
     const now = new Date();
-    const dateTime = now.toLocaleString('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-      timeZoneName: 'short'
-    });
+    const tz = timezone || process.env.TIMEZONE || "Asia/Kolkata"; // use client -> env -> fallback
+
+    let dateTime;
+    try {
+      dateTime = new Intl.DateTimeFormat("en-US", {
+        timeZone: tz,
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZoneName: "short",
+      }).format(now);
+    } catch (e) {
+      console.warn("Timezone formatting failed, falling back to ISO:", e);
+      dateTime = now.toISOString(); // fallback
+    }
 
     // Professional HTML email template
     const htmlTemplate = `
@@ -92,12 +107,12 @@ exports.handler = async function (event, context) {
                       <td style="padding: 8px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #4f46e5;">Company</td>
                       <td style="padding: 8px 0; border-bottom: 1px solid #eee;">${company}</td>
                     </tr>
-                    ` : ''}
+                    ` : ""}
                   </table>
                   
                   <h2 style="color: #4f46e5; margin: 30px 0 15px; font-size: 18px;">Message</h2>
                   <div style="background-color: #f8fafc; padding: 20px; border-radius: 6px; border-left: 4px solid #4f46e5;">
-                    <p style="margin: 0; line-height: 1.6; color: #475569;">${message.replace(/\n/g, '<br>')}</p>
+                    <p style="margin: 0; line-height: 1.6; color: #475569;">${message.replace(/\n/g, "<br>")}</p>
                   </div>
                 </td>
               </tr>
@@ -105,7 +120,7 @@ exports.handler = async function (event, context) {
               <!-- Action -->
               <tr>
                 <td style="padding: 0 30px 30px; text-align: center;">
-                  <a href="mailto:${email}" style="display: inline-block; background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">Reply to ${name.split(' ')[0]}</a>
+                  <a href="mailto:${email}" style="display: inline-block; background-color: #4f46e5; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px;">Reply to ${name.split(" ")[0]}</a>
                 </td>
               </tr>
               
@@ -139,7 +154,7 @@ CONTACT DETAILS:
 ----------------
 Name: ${name}
 Email: ${email}
-${company ? `Company: ${company}` : ''}
+${company ? `Company: ${company}` : ""}
 
 MESSAGE:
 --------
@@ -154,14 +169,14 @@ Please do not reply to this automated message.
       from: `"Portfolio Contact" <${process.env.VITE_CONTACT_EMAIL}>`,
       replyTo: `${name} <${email}>`,
       to: process.env.VITE_CONTACT_EMAIL,
-      subject: `New Contact: ${name} ${company ? `from ${company}` : ''}`,
+      subject: `New Contact: ${name} ${company ? `from ${company}` : ""}`,
       text: textTemplate,
       html: htmlTemplate,
       headers: {
-        'X-Priority': '1',
-        'X-MSMail-Priority': 'High',
-        'Importance': 'High'
-      }
+        "X-Priority": "1",
+        "X-MSMail-Priority": "High",
+        Importance: "High",
+      },
     };
 
     await transporter.sendMail(mailOptions);
@@ -174,9 +189,12 @@ Please do not reply to this automated message.
     console.error("Error sending email:", error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ 
-        message: "Error sending email", 
-        error: process.env.NODE_ENV === "development" ? error.message : "Please try again later." 
+      body: JSON.stringify({
+        message: "Error sending email",
+        error:
+          process.env.NODE_ENV === "development"
+            ? error.message
+            : "Please try again later.",
       }),
     };
   }
